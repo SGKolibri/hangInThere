@@ -1,0 +1,7 @@
+export {default as Hangman0} from './hangman0.svg'
+export {default as Hangman1} from './hangman1.svg'
+export {default as Hangman2} from './hangman2.svg'
+export {default as Hangman3} from './hangman3.svg'
+export {default as Hangman4} from './hangman4.svg'
+export {default as Hangman5} from './hangman5.svg'
+export {default as Hangman6} from './hangman6.svg'

@@ -1,35 +1,50 @@
-# 🎮 Hang in There
+# React + TypeScript + Vite
 
-**Hang in There** is a fun and challenging **React-based word guessing game** that combines elements of both **Wordle** and the classic **Hangman** game. Each day, a new word is automatically generated, and players have **6 attempts** to guess the word before they run out of chances. The game brings a nostalgic twist with a hangman-style visual!
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## 📝 Key Features
+Currently, two official plugins are available:
 
-- 🎯 **Daily Word Challenge:** A new word is auto-generated every day for you to guess!
-- 🎮 **6 Attempts:** You have six chances to correctly guess the word of the day.
-- 🎨 **Themed Categories:**
-  - 🖥️ **Tech**
-  - 🦁 **Animals**
-  - 🎶 **Music**
-  - 🌍 **General Mode** (default)
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## 🎉 Why Play?
+## Expanding the ESLint configuration
 
-Whether you're a:
-- 🧑‍💻 **Tech enthusiast**
-- 🦓 **Animal lover**
-- 🎸 **Music fan**
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-**Hang in There** provides a fresh and exciting way to test your vocabulary and problem-solving skills daily. Choose your favorite theme, or stick with the general mode for a classic challenge!
+- Configure the top-level `parserOptions` property like this:
 
----
+```js
+export default tseslint.config({
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
+```
 
-### 🚀 Get Started
+- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
+- Optionally add `...tseslint.configs.stylisticTypeChecked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
 
-Clone the repository and install the dependencies to start playing!
+```js
+// eslint.config.js
+import react from 'eslint-plugin-react'
 
-```bash
-git clone https://github.com/SGKolibri/hangInThere.git
-
-cd hangInThere
-npm install
-npm run dev
+export default tseslint.config({
+  // Set the react version
+  settings: { react: { version: '18.3' } },
+  plugins: {
+    // Add the react plugin
+    react,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended rules
+    ...react.configs.recommended.rules,
+    ...react.configs['jsx-runtime'].rules,
+  },
+})
+```
